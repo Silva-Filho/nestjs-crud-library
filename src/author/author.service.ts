@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthorDto } from './dto/create-author.dto';
-import { UpdateAuthorDto } from './dto/update-author.dto';
+import { Injectable } from "@nestjs/common";
+
+import { CreateAuthorDto } from "./dto/create-author.dto";
+import { UpdateAuthorDto } from "./dto/update-author.dto";
+import { Author } from "./entities/author.entity";
 
 @Injectable()
 export class AuthorService {
-  create(createAuthorDto: CreateAuthorDto) {
-    return 'This action adds a new author';
-  }
+    private authors: Author[] = [];
 
-  findAll() {
-    return `This action returns all author`;
-  }
+    create(createAuthorDto: CreateAuthorDto) {
+        const currentMaxId = this.authors[this.authors.length - 1]?.id || 0;
+        const id = currentMaxId + 1;
+        const author = {
+            id,
+            ...createAuthorDto,
+        };
 
-  findOne(id: number) {
-    return `This action returns a #${id} author`;
-  }
+        this.authors.push(author);
 
-  update(id: number, updateAuthorDto: UpdateAuthorDto) {
-    return `This action updates a #${id} author`;
-  }
+        return author;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} author`;
-  }
+    findAll() {
+        return "This action returns all author";
+    }
+
+    findOne(id: number) {
+        return `This action returns a #${id} author`;
+    }
+
+    update(id: number, updateAuthorDto: UpdateAuthorDto) {
+        return `This action updates a #${id} author`;
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} author`;
+    }
 }
