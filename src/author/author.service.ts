@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 
 import { CreateAuthorDto } from "./dto/create-author.dto";
 import { UpdateAuthorDto } from "./dto/update-author.dto";
@@ -22,18 +22,39 @@ export class AuthorService {
     }
 
     findAll() {
-        return "This action returns all author";
+        return this.authors;
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} author`;
+        const index = this.authors.findIndex( author => author.id === id );
+
+        return this.authors[index];
     }
 
     update(id: number, updateAuthorDto: UpdateAuthorDto) {
-        return `This action updates a #${id} author`;
+        const author = this.findOne(id);
+
+        const newAuthor = {
+            ...author,
+            ...updateAuthorDto,
+        };
+
+        const index = this.authors.findIndex( author => author.id === id );
+
+        this.authors[index] = newAuthor;
+
+        return newAuthor;
     }
 
     remove(id: number) {
+        const index = this.authors.findIndex( author => author.id === id );
+
+        if (index === -1) {
+            throw new NotFoundException("Autor não encontrado.");
+        }
+
+        this.authors.splice(index, 1);
+
         return `This action removes a #${id} author`;
     }
 }
