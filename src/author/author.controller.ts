@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from "@nestjs/common";
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from "@nestjs/common";
 
 import { AuthorService } from "./author.service";
 import { CreateAuthorDto } from "./dto/create-author.dto";
@@ -19,17 +19,23 @@ export class AuthorController {
     }
 
     @Get(":id")
-    findOne(@Param("id") id: string) {
-        return this.authorService.findOne(+id);
+    findOne(@Param("id") id: number) {
+        const user = this.authorService.findOne(id);
+
+        if (!user) {
+            throw new NotFoundException("Autor não encontrado.");
+        }
+
+        return user;
     }
 
     @Patch(":id")
-    update(@Param("id") id: string, @Body() updateAuthorDto: UpdateAuthorDto) {
-        return this.authorService.update(+id, updateAuthorDto);
+    update(@Param("id") id: number, @Body() updateAuthorDto: UpdateAuthorDto) {
+        return this.authorService.update(id, updateAuthorDto);
     }
 
     @Delete(":id")
-    remove(@Param("id") id: string) {
-        return this.authorService.remove(+id);
+    remove(@Param("id") id: number) {
+        return this.authorService.remove(id);
     }
 }
