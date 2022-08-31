@@ -1,0 +1,12 @@
+{
+    "material-icon-theme.files.associations": {
+        "*.controller.ts": "Nest-controller",
+        // "*.controller.ts": "Nest",
+        "*.module.ts": "Nest-module",
+        "*.service.ts": "Nest-service",
+    },
+    "material-icon-theme.folders.associations": {
+        "entities": "Interface",
+        "dto": "Mappings",
+    },
+}
