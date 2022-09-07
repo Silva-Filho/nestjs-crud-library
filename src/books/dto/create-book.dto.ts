@@ -1,5 +1,6 @@
 import { 
-    IsDate, 
+    // IsDate, 
+    IsDateString, 
     IsInt, 
     IsNotEmpty, 
     // IsNumber, 
@@ -30,7 +31,8 @@ export class CreateBookDto {
     @IsNotEmpty()
         genre: string;
 
-    @IsDate()
+    // @IsDate()
+    @IsDateString()
     @IsOptional()
         publishedAt: string;
 }
