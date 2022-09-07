@@ -62,6 +62,6 @@ export class BooksService {
             throw new EntityNotFoundError( Book, id );            
         }
 
-        return `This action removes a #${id} book`;
+        return `O livro de id #${id} foi removido.`;
     }
 }
