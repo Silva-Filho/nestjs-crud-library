@@ -9,12 +9,13 @@ import { AuthorsModule } from "./authors/authors.module";
 // import { Book } from "./books/entities/book.entity";
 import { DatabaseModule } from "./database/database.module";
 import { BooksModule } from "./books/books.module";
+import { UsersModule } from "./users/users.module";
 
 @Module( {
     imports: [
-        ConfigModule.forRoot( { 
+        ConfigModule.forRoot( {
             // envFilePath: [".env"], 
-            isGlobal: true, 
+            isGlobal: true,
             // cache: true,
         } ),
         /* TypeOrmModule.forRoot( {
@@ -28,11 +29,12 @@ import { BooksModule } from "./books/books.module";
             synchronize: true,
             logging: true,
         } ), */
-        DatabaseModule, 
-        AuthorsModule, 
+        DatabaseModule,
+        AuthorsModule,
         BooksModule,
+        UsersModule,
     ],
     controllers: [ AppController ],
     providers: [ AppService ],
 } )
-export class AppModule {}
+export class AppModule { }
