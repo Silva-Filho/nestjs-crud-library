@@ -21,7 +21,7 @@ export class Author {
     
     @Column( { 
         name: "age",
-        type: "int4", 
+        type: "int2", 
         nullable: true, 
     } )
         // Talvez com interrogação?
