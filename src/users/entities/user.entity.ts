@@ -38,9 +38,10 @@ export class User {
 
     @Column( {
         name: "cpf",
-        type: "bigint",
+        type: "char",
+        length: 11,
         nullable: false,
         unique: true,
     } )
-        cpf: number;
+        cpf: string;
 }
